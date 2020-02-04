@@ -5,26 +5,30 @@
  */
 package com.mycompany.applicationpdf;
 
+import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfReader;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
 import java.io.IOException;
+import javax.enterprise.context.RequestScoped;
 
 /**
  *
  * @author vince
  */
 @Named(value = "pdfReader")
-@Dependent
+@RequestScoped
 public class DisplayPDF {
-
-    PdfReader reader;
     String document = "E:\\EPSI\\B3\\PLANNING_B3 19-20 CDA.pdf";
+    PdfDocument pdfDocument;
+    PdfReader readerFile = new PdfReader(this.document);
 
     /**
      * Creates a new instance of pdfReader
+     * @throws java.io.IOException
      */
-    public DisplayPDF() {
+    public DisplayPDF() throws IOException {
+        this.pdfDocument = new PdfDocument(readerFile);
+        pdfDocument.removePage(10);
     }
 
     public void displayFile() throws IOException {
