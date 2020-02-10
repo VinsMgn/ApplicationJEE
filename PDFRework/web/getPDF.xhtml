@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <h:outputStylesheet library="css" name="style.css"></h:outputStylesheet>
+    </h:head>
+    <h:body>
+
+        <f:metadata>
+            <f:viewAction action="#{deletePDF.onload(param['fileName'])}" />            
+            <f:viewAction action="#{selectPDF.onload(param['fileName'])}" />            
+            <f:viewAction action="#{mergePDF.onload(param['fileName'])}" />            
+            <f:viewAction action="#{reorderPDF.onload(param['fileName'])}" />            
+            <f:viewAction action="#{signPDF.onload(param['fileName'])}" />
+            <f:viewAction action="#{extractImage.onload(param['fileName'])}" />
+        </f:metadata>
+        <div style="display:flex;" >
+            <iframe style="display:inline-block" src="/PDFRework/faces/GetPDFServlet?fileName=#{deletePDF.fileName}" width="800" height="900" scrolling="no"></iframe>
+
+            <div style="margin-left:24px;" class="choices-container">
+                <h1>Le coutal suisse du PDF</h1>
+
+                <h:form >
+                    <span>
+                        <p>
+                            Mettez les numéros de pages que vous souhaitez supprimer séparés d'un espace.
+                        </p>
+                        <div>
+                            <h:inputText value="#{deletePDF.pagesNumber}">
+                            </h:inputText>
+                            <h:commandButton value="Supprimer" action="#{deletePDF.deletePages()}"/>
+                        </div>
+                    </span>
+
+                </h:form>
+                <hr/>
+
+                <h:form>
+                    <p>
+                        Mettez les numéros de pages que vous souhaitez garder séparés d'un espace.
+                    </p>
+                    <div>
+                        <h:inputText value="#{selectPDF.pagesNumber}">
+                        </h:inputText>
+                        <h:commandButton value="Selectionner" action="#{selectPDF.selectPages()}"/>
+                    </div>
+                </h:form>
+                <hr/>
+
+                <h:form  enctype="multipart/form-data">
+                    <p>Fusionner avec un autre PDF</p>
+                    <div>
+                        <h:inputFile class="inputFile btn btn-secondary" value="#{mergePDF.file}" id="file" style="padding-top:0;padding-bottom: 0;">
+                        </h:inputFile>
+                        <h:commandButton   action="#{mergePDF.upload}"  value="Upload" class="btn btn-primary"/>
+                        <h:commandButton value="Fusionner" action="#{mergePDF.mergePDF()}" />
+
+                    </div>
+                </h:form>
+                <hr/>
+
+                <h:form>
+                    <p>
+                        Mettez les numéros de pages dans l'ordre que vous souhaitez.
+                    </p>
+                    <div>
+                        <h:inputText value="#{reorderPDF.pagesNumber}">
+                        </h:inputText>
+                        <h:commandButton value="Selectionner" action="#{reorderPDF.reorderPages()}"/>
+                        <c:if test="#{reorderPDF.isTooLong == true }">
+                            Veuillez saisir des pages qui existent.
+                        </c:if>
+                        <c:if test="#{reorderPDF.isTooShort == true }">
+                            Le nombre de pages inscrit est trop petit par rapport au nombre de pages présentent dans le PDF.
+                        </c:if>
+                    </div>
+
+                </h:form>
+                <hr/>
+                <h:form>
+                    <p>
+                        Signer le document
+                    </p>
+                    <div>
+                        <h:inputText value="#{signPDF.signature}">
+                        </h:inputText>
+                        <h:commandButton value="Signer" action="#{signPDF.signMyPdf}"/>
+                    </div>
+
+                </h:form>
+                <!--<h:form>
+                    <p>
+                        Extraire toutes les images du PDF
+                    </p>
+                    <div>
+                                            <h:commandButton value="Extraire" action=""/>
+                    </div>
+                </h:form>-->
+            </div>
+
+        </div>
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,77 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 10 févr. 2020, 10:10:46
+    Author     : gmartin
+*/
+body{
+    background:#f1f1f1;
+}
+*{
+    font-family: sans-serif;
+}
+.choices-container{
+    display:flex;
+    flex-direction:column;
+}
+.choices-container  span{
+    display:flex;
+    flex-direction:column;
+}
+input[type="submit"]{
+    background: transparent;
+    border: 1px solid black;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: 0.25s ease;
+    margin-left:12px;
+}
+input[type="submit"]:hover{
+    background: black;
+    color:white;
+}
+input[type="text"]{
+    padding: 10px 15px;
+    border: 1px solid black;
+    border-radius: 5px;
+    background:rgba(255,255,255,0.4);
+}
+
+p{
+    margin: 0;
+    margin-bottom: 12px;
+}
+hr{
+    background:black;
+    width: 100%;
+    margin: 24px 0;
+}
+.see-my-pdf{
+    background: transparent;
+    border: 1px solid black;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px 1px rgba(0,0,0,0.4);
+    cursor: pointer;
+    transition: 0.25s ease;
+    text-decoration: none;
+    margin-top:12px;
+}
+.see-my-pdf:hover{
+    background: black;
+    color:white;
+}
+.index-container{
+    display:flex; justify-content: center; align-items: center; height:100vh; flex-direction: column;
+}
+.index-form{
+    display:flex; flex-direction: column; justify-content: center; align-items: center;
+}
+.no-margin{
+    margin:0;
+}
